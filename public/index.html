@@ -296,6 +296,10 @@ const firebaseConfig = {
   messagingSenderId: "778187488662",
   appId: "1:778187488662:web:04b3a0a96e8778af9e31b7"
 };
+window.FIREBASE_CONFIG = firebaseConfig; 
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -843,6 +847,7 @@ document.querySelectorAll('.cpill').forEach(b=>b.addEventListener('click',queueS
 document.querySelectorAll('.ppill').forEach(b=>b.addEventListener('click',queueSave));
 
 initAuth();
+
 </script>
 </body>
 </html>
