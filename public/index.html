@@ -485,10 +485,13 @@ function spawnCard(text,cat='scroll',pri='normal',due=null,taskId=null){
   const obj={
     taskId:persistentId,text,cat,pri,due,
     el,cat,pri,color:c.color,glow:c.glow,
-    bx,by,vx:rand(-.25,.25),vy:rand(-.2,.1),
-    t:Math.random()*Math.PI*2,tspd:.005+Math.random()*.006,
+    bx,by,vx:rand(-.42,.42),vy:rand(-.34,.18),
+    t:Math.random()*Math.PI*2,tspd:.012+Math.random()*.01,
+    waveX:Math.random()*Math.PI*2,waveY:Math.random()*Math.PI*2,
+    waveSX:.022+Math.random()*.016,waveSY:.018+Math.random()*.014,
     fqx:.7+Math.random()*.5,fqy:.5+Math.random()*.4,
-    swx:7+Math.random()*9,swy:5+Math.random()*7,
+    swx:14+Math.random()*16,swy:10+Math.random()*14,
+    oscX:22+Math.random()*24,oscY:14+Math.random()*18,
     rot:rand(-7,7),sinking:false,dead:false
   };
   cards.push(obj);
@@ -535,19 +538,23 @@ function loop(){
     if(o.dead)continue;
     o.t+=o.tspd;
     if(!o.sinking){
+      o.vx+=Math.sin(o.t*0.41)*0.003;
+      o.vy+=Math.cos(o.t*0.33)*0.003;
       if(o.bx<SID)o.vx+=.009;
       if(o.bx>W-CARD_W-SID)o.vx-=.009;
       if(o.by<TOP)o.vy+=.009;
       if(o.by>H-BOT-CARD_H)o.vy-=.009;
-      o.vx*=.998; o.vy*=.998;
-      o.vx=Math.max(-.36,Math.min(.36,o.vx));
-      o.vy=Math.max(-.36,Math.min(.36,o.vy));
+      o.vx*=.9992; o.vy*=.9992;
+      o.vx=Math.max(-.56,Math.min(.56,o.vx));
+      o.vy=Math.max(-.52,Math.min(.52,o.vy));
     } else {
       o.vy+=.04;
     }
     o.bx+=o.vx; o.by+=o.vy;
-    const dx=o.bx+Math.sin(o.t*o.fqx)*o.swx;
-    const dy=o.by+Math.sin(o.t*o.fqy)*o.swy;
+    o.waveX+=o.waveSX;
+    o.waveY+=o.waveSY;
+    const dx=o.bx+Math.sin(o.t*o.fqx)*o.swx+Math.sin(o.waveX)*o.oscX;
+    const dy=o.by+Math.sin(o.t*o.fqy)*o.swy+Math.sin(o.waveY)*o.oscY;
     o.rot+=Math.sin(o.t*.42)*.04;
     o.rot=Math.max(-9,Math.min(9,o.rot));
     o.el.style.left=dx+'px';
