@@ -270,15 +270,7 @@ Potential features for improvement:
 - Dark/Light mode toggle
 - Task tags and filtering
 
-## License
 
-[Add your license here]
-
-## Author
-
-[Add author information]
-
----
 
 **Deploy Status**: [![Firebase Hosting](https://github.com/yourusername/Hogwarts-Todo/workflows/Deploy%20to%20Firebase%20Hosting/badge.svg)](https://github.com/yourusername/Hogwarts-Todo/actions)
 
